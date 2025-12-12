@@ -7,10 +7,16 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    
+    <!-- Ornamen Sambutan/Loading -->
+    <div id="welcome-ornament" class="ornament-container"></div>
+    <!-- Ornamen Saat Add -->
+    <div id="add-ornament" class="ornament-container"></div>
+    <!-- Ornamen Saat Delete All -->
+    <div id="delete-ornament" class="ornament-container"></div>
+
     <div class="app-card">
         <h1>To Do List</h1>
-        
-        <!-- Form To-Do and Date Input (FITUR WAJIB) -->
         <form id="todo-form" class="input-group">
             <input type="text" id="todo-input" placeholder="Add a new task..." required>
             <input type="date" id="date-input" required class="date-input">
@@ -18,24 +24,18 @@
         </form>
 
         <div class="controls-bar">
-            <!-- Filter (FITUR WAJIB) -->
             <select id="filter-status" class="filter-select">
                 <option value="all">Filter: All Tasks</option>
                 <option value="pending">Pending</option>
                 <option value="completed">Completed</option>
             </select>
-            <!-- Delete All (Bagian dari FITUR WAJIB Delete) -->
             <button id="delete-all-button" class="button delete-all-btn">Delete All</button>
         </div>
 
-        <!-- Display To-Do List (FITUR WAJIB) -->
         <div class="task-list-container">
             <div id="todo-list" class="task-list">
-                <!-- Data akan diisi oleh JavaScript -->
             </div>
         </div>
-
-        <!-- Bagian Identitas Kreator Baru -->
         <div class="footer-creator">
             <p>Created by: 
                 <a href="https://www.linkedin.com/in/hizkia-anindito-8588261ba/" target="_blank" class="creator-link">
@@ -47,7 +47,6 @@
 
     </div>
 
-    <!-- File JavaScript harus berada di dalam folder js/ dan hanya 1 file -->
     <script src="js/script.js"></script>
 </body>
 </html>

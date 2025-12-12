@@ -5,10 +5,41 @@ const todoList = document.getElementById('todo-list');
 const filterStatus = document.getElementById('filter-status');
 const deleteAllButton = document.getElementById('delete-all-button');
 
+const welcomeOrnamentContainer = document.getElementById('welcome-ornament');
+const addOrnamentContainer = document.getElementById('add-ornament');
+const deleteOrnamentContainer = document.getElementById('delete-ornament');
+
 let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
 function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+function createOrnaments(container, count, type = 'star') {
+    const symbols = {
+        star: ['✨', '⭐', '💫'],
+        snow: ['❄️', '❅', '❆'],
+        santa: ['🎅', '🎁', '🔔']
+    };
+    
+    for (let i = 0; i < count; i++) {
+        const ornament = document.createElement('span');
+        const symbolArray = symbols[type] || symbols.star;
+        ornament.textContent = symbolArray[Math.floor(Math.random() * symbolArray.length)];
+        ornament.className = `ornament ${type}`;
+        
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        ornament.style.left = `${x}vw`;
+        ornament.style.top = `${y}vh`;
+        ornament.style.animationDelay = `${Math.random() * 0.5}s`;
+        
+        container.appendChild(ornament);
+
+        setTimeout(() => {
+            ornament.remove();
+        }, 3000); 
+    }
 }
 
 function renderTodos() {
@@ -26,7 +57,6 @@ function renderTodos() {
         noTaskDiv.className = 'no-task-row';
         noTaskDiv.textContent = 'No task found';
         todoList.appendChild(noTaskDiv);
-        return;
     }
     
     filteredTodos.forEach(todo => {
@@ -50,7 +80,13 @@ function renderTodos() {
         
         const statusSpan = document.createElement('div');
         statusSpan.className = `task-status status-${todo.status.toLowerCase()}`;
-        statusSpan.textContent = todo.status;
+        
+        
+        if (todo.status === 'Completed') {
+            statusSpan.innerHTML = `Completed ✅`;
+        } else {
+            statusSpan.textContent = todo.status;
+        }
 
         const actionsDiv = document.createElement('div');
         actionsDiv.className = 'task-actions';
@@ -75,6 +111,20 @@ function renderTodos() {
     });
 }
 
+function welcomeAnimation() {
+    const santa = document.createElement('span');
+    santa.textContent = '🎅';
+    santa.className = 'welcome-santa';
+    document.body.appendChild(santa);
+
+    setTimeout(() => {
+        santa.remove();
+    }, 5000); 
+    
+    createOrnaments(welcomeOrnamentContainer, 15, 'snow');
+}
+
+
 todoForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -96,6 +146,8 @@ todoForm.addEventListener('submit', function(e) {
     todos.push(newTodo);
     saveTodos(); 
     renderTodos(); 
+    
+    createOrnaments(addOrnamentContainer, 10, 'star');
 
     todoInput.value = '';
     dateInput.value = '';
@@ -119,9 +171,12 @@ function toggleStatus(id) {
 filterStatus.addEventListener('change', renderTodos);
 
 deleteAllButton.addEventListener('click', function() {
+    createOrnaments(deleteOrnamentContainer, 8, 'santa');
+    
     todos = [];
     saveTodos();
     renderTodos();
 });
 
 renderTodos();
+welcomeAnimation();

@@ -1,10 +1,21 @@
-/* style.css - Desain Apple Inspired (Minimalist & Clean) */
+/* Warna Natal */
+/* Merah Tua/Burgundy: #900020 */
+/* Hijau Tua/Pine: #014421 */
+/* Emas/Krem: #e8d0a9 */
+/* Teks Putih: #ffffff */
+@keyframes backgroundMovement {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-/* Font Stack Apple/System untuk tampilan modern dan bersih */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: #f5f5f7; /* Latar belakang cerah/abu-abu muda */
-    color: #1d1d1f; /* Warna teks gelap */
+    background: linear-gradient(135deg, #e8d0a9, #ffffff, #900020); 
+    background-size: 400% 400%; 
+    animation: backgroundMovement 30s ease infinite; 
+    
+    color: #1d1d1f; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,24 +25,26 @@ body {
 }
 
 .app-card {
-    background-color: #ffffff; /* Kartu putih */
+    background-color: rgba(255, 255, 255, 0.95); 
     padding: 35px;
-    border-radius: 18px;
+    border-radius: 20px; 
     width: 90%;
     max-width: 600px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Shadow lembut */
-    border: 1px solid #e0e0e0;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); 
+    border: 1px solid #f0f0f0;
+    z-index: 10;
 }
 
 h1 {
     text-align: center;
-    font-size: 1.8rem;
-    font-weight: 600; 
+    font-size: 3rem; 
+    font-weight: 700; 
     margin-bottom: 30px;
-    color: #1d1d1f;
+    color: #014421; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
-/* --- Form Input (Form To-Do and Date Input) --- */
+/* --- Form Input --- */
 .input-group {
     display: flex;
     gap: 10px;
@@ -45,11 +58,13 @@ h1 {
     background-color: #ffffff;
     color: #1d1d1f;
     flex-grow: 1;
+    transition: border-color 0.2s;
 }
 
 #todo-input:focus, .date-input:focus {
-    border-color: #007aff; 
+    border-color: #900020; 
     outline: none;
+    box-shadow: 0 0 0 3px rgba(144, 0, 32, 0.2);
 }
 
 .date-input {
@@ -57,7 +72,7 @@ h1 {
     width: 140px;
 }
 
-/* --- Buttons and Selects --- */
+/* --- Button --- */
 .button {
     padding: 12px 15px;
     border: none;
@@ -68,7 +83,7 @@ h1 {
 }
 
 .primary-btn {
-    background-color: #007aff; 
+    background-color: #014421; 
     color: white;
     font-size: 1.5rem;
     line-height: 1;
@@ -80,7 +95,7 @@ h1 {
 }
 
 .primary-btn:hover {
-    background-color: #0059c0;
+    background-color: #002d14; 
 }
 
 .controls-bar {
@@ -100,16 +115,16 @@ h1 {
 }
 
 .delete-all-btn {
-    background-color: #ff3b30; 
+    background-color: #900020; 
     color: white;
     padding: 10px 15px;
 }
 
 .delete-all-btn:hover {
-    background-color: #cc0000;
+    background-color: #6d0018;
 }
 
-/* --- Task List (Display To-Do List) --- */
+/* --- Task List --- */
 .task-list {
     display: flex;
     flex-direction: column;
@@ -160,13 +175,12 @@ h1 {
 }
 
 .status-pending {
-    color: #ff9500; 
+    color: #900020; 
 }
 
 .status-completed {
-    color: #34c759; 
-    text-decoration: line-through;
-}
+    color: #014421; 
+    }
 
 .task-actions {
     margin-left: 15px;
@@ -184,16 +198,16 @@ h1 {
 }
 
 .toggle-btn {
-    background-color: #e5e5ea; 
+    background-color: #e8d0a9; 
     color: #1d1d1f;
 }
 
 .toggle-btn:hover {
-    background-color: #d2d2d7;
+    background-color: #c9b187;
 }
 
 .delete-btn {
-    background-color: #ff3b30;
+    background-color: #900020;
     color: white;
 }
 
@@ -205,7 +219,7 @@ h1 {
     background-color: #fcfcfc;
 }
 
-/* Style Footer Kreator */
+/* Footer Kreator */
 .footer-creator {
     margin-top: 30px;
     padding-top: 20px;
@@ -216,16 +230,62 @@ h1 {
 }
 
 .creator-link {
-    text-decoration: none; /* Hapus garis bawah link */
-    color: inherit; /* Warisi warna dari parent (footer-creator) */
+    text-decoration: none; 
+    color: inherit; 
     transition: color 0.2s;
 }
 
 .creator-link:hover {
-    color: #007aff; /* Tampilkan efek hover Apple Blue */
+    color: #900020; 
 }
 
 .creator-link strong {
     font-weight: 500;
     color: #1d1d1f;
+}
+
+.ornament-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.ornament {
+    position: absolute;
+    font-size: 20px;
+    animation: fall-fade 3s forwards;
+    opacity: 0;
+}
+
+.ornament.star { color: gold; }
+.ornament.snow { color: white; }
+.ornament.santa { font-size: 30px; }
+
+@keyframes fall-fade {
+    0% { transform: translate(0, -10%); opacity: 1; }
+    50% { opacity: 1; }
+    100% { transform: translate(0, 100vh); opacity: 0; }
+}
+
+
+.welcome-santa {
+    position: fixed;
+    top: -50px;
+    left: -50px;
+    font-size: 40px;
+    animation: fly-across 5s forwards;
+    opacity: 0;
+    z-index: 101;
+}
+
+@keyframes fly-across {
+    0% { transform: translate(-100vw, 50vh); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translate(150vw, 50vh); opacity: 0; }
 }
